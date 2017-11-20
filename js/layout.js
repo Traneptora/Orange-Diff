@@ -31,7 +31,7 @@ function setupDiffLayout(imageAURL, imageBURL){
 		"border": "0px",
 		"padding": "0px"
 	});
-	var $htag = $("<p><h4>Image A</h4></p>");
+	var $htag = $("<h4>Image A</h4>");
 	var $imgtag = $("<img>");
 	$imgtag.css({
 		"border": "0px",
