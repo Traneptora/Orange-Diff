@@ -22,7 +22,7 @@ function parseURLParams(url) {
 }
 
 function setupDiffLayout(imageAURL, imageBURL){
-	$wrapperdiv = $("<div></div>");
+	var $wrapperdiv = $("<div></div>");
 	$wrapperdiv.css({
 		"margin-left": "25px",
 		"margin-right": "25px",
@@ -31,8 +31,8 @@ function setupDiffLayout(imageAURL, imageBURL){
 		"border": "0px",
 		"padding": "0px"
 	});
-	$htag = $("<h4>Image A</h4>");
-	$imgtag = $("<img>");
+	var $htag = $("<h4>Image A</h4>");
+	var $imgtag = $("<img>");
 	$imgtag.css({
 		"border": "0px",
 		"padding": "0px",
@@ -49,7 +49,11 @@ function setupDiffLayout(imageAURL, imageBURL){
 	});
 	$wrapperdiv.append($htag);
 	$wrapperdiv.append($imgtag);
-    $
+    var $backbutton = $('<p><button>Go Back</button></p>');
+    $backbutton.on("click", function(){
+        window.location.search = window.location.search + "&nogen=true";
+    });
+    $wrapperdiv.append($backbutton);
 	$(document.body).css({
 		"padding": "0px",
 		"margin": "0px",
@@ -57,7 +61,6 @@ function setupDiffLayout(imageAURL, imageBURL){
         "text-align": "left"
 	});
 	document.body.innerHTML = "";
-
 	$(document.body).append($wrapperdiv);
 }
 
@@ -68,7 +71,6 @@ function submitDiff(){
 		var imageAURLEncoded = encodeURIComponent(imageAURL);
 		var imageBURLEncoded = encodeURIComponent(imageBURL);
 		window.location.search = "?imagea=" + imageAURLEncoded + "&imageb=" + imageBURLEncoded;
-		setupDiffLayout(imageAURL, imageBURL);
 	}
 }
 
