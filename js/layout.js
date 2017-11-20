@@ -40,12 +40,10 @@ function setupDiffLayout(imageAURL, imageBURL){
 	});
 	$imgtag.prop("src", imageAURL);
 	$imgtag.on("mouseover", function(){
-		$(this).prop("src", "");
 		$(this).prop("src", imageBURL);
 		$htag.prop("innerHTML", "Image B");
 	});
 	$imgtag.on("mouseout", function(){
-		$(this).prop("src", "");
 		$(this).prop("src", imageAURL);
 		$htag.prop("innerHTML", "Image A");
 	});
