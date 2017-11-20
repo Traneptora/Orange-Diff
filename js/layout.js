@@ -40,25 +40,27 @@ function setupDiffLayout(imageAURL, imageBURL){
 	});
 	$imgtag.prop("src", imageAURL);
 	$imgtag.on("mouseover", function(){
+		$(this).prop("src", "");
 		$(this).prop("src", imageBURL);
 		$htag.prop("innerHTML", "Image B");
 	});
 	$imgtag.on("mouseout", function(){
+		$(this).prop("src", "");
 		$(this).prop("src", imageAURL);
 		$htag.prop("innerHTML", "Image A");
 	});
 	$wrapperdiv.append($htag);
 	$wrapperdiv.append($imgtag);
-    var $backbutton = $('<p><button>Go Back</button></p>');
-    $backbutton.on("click", function(){
-        window.location.search = window.location.search + "&nogen=true";
-    });
-    $wrapperdiv.append($backbutton);
+	var $backbutton = $('<p><button>Go Back</button></p>');
+	$backbutton.on("click", function(){
+		window.location.search = window.location.search + "&nogen=true";
+	});
+	$wrapperdiv.append($backbutton);
 	$(document.body).css({
 		"padding": "0px",
 		"margin": "0px",
 		"border": "0px",
-        "text-align": "left"
+		"text-align": "left"
 	});
 	document.body.innerHTML = "";
 	$(document.body).append($wrapperdiv);
