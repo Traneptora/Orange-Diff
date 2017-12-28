@@ -31,7 +31,7 @@ function setupDiffLayout(imageAURL, imageBURL){
 		"border": "0px",
 		"padding": "0px"
 	});
-	var $htag = $("<h4>Image A</h4>");
+	var $htag = $("<h4>Image A<br>Mouse over for Image B. Wait for it to load.</h4>");
 	var $imgtag = $("<img>");
 	$imgtag.css({
 		"border": "0px",
@@ -41,11 +41,11 @@ function setupDiffLayout(imageAURL, imageBURL){
 	$imgtag.prop("src", imageAURL);
 	$imgtag.on("mouseover", function(){
 		$(this).prop("src", imageBURL);
-		$htag.prop("innerHTML", "Image B");
+		$htag.prop("innerHTML", "Image B<br>Mouse out for Image A. Wait for it to load.");
 	});
 	$imgtag.on("mouseout", function(){
 		$(this).prop("src", imageAURL);
-		$htag.prop("innerHTML", "Image A");
+		$htag.prop("innerHTML", "Image A<br>Mouse over for Image B. Wait for it to load.");
 	});
 	$wrapperdiv.append($htag);
 	$wrapperdiv.append($imgtag);
