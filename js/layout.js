@@ -74,7 +74,7 @@ function submitDiff(){
 	}
 }
 
-document.addEventListener("DOMContentLoaded", function(){
+$(function(){
 	var params = parseURLParams(window.location.search);
 	if (params.imagea && params.imageb){
 		if (params.nogen && params.nogen === "true"){
