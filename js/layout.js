@@ -15,67 +15,51 @@ function parseURLParams(url) {
 			continue;
 		}
 		let key = decodeURIComponent(pairs[i].slice(0, eqIndex));
-		let value = decodeURIComponent(keyvalue[1]);
-		parms[n] = v;
+		let value = decodeURIComponent(pairs[i].slice(eqIndex + 1));
+		params[key] = value;
 	}
-	return parms;
+	return params;
 }
 
 function setupDiffLayout(imageAURL, imageBURL){
-	var $wrapperdiv = $("<div></div>");
-	$wrapperdiv.css({
-		"margin-left": "25px",
-		"margin-right": "25px",
-		"margin-top": "25px",
-		"margin-bottom": "25px",
-		"border": "0px",
-		"padding": "0px"
-	});
-	var $htag = $("<h4>Image A<br>Mouse over for Image B. Wait for it to load.</h4>");
-	var $imgtag = $("<img>");
-	$imgtag.css({
-		"border": "0px",
-		"padding": "0px",
-		"margin": "0px"
-	});
-	$imgtag.prop("src", imageAURL);
-	$imgtag.on("mouseover", function(){
-		$(this).prop("src", imageBURL);
-		$htag.prop("innerHTML", "Image B<br>Mouse out for Image A. Wait for it to load.");
-	});
-	$imgtag.on("mouseout", function(){
-		$(this).prop("src", imageAURL);
-		$htag.prop("innerHTML", "Image A<br>Mouse over for Image B. Wait for it to load.");
-	});
-	$wrapperdiv.append($htag);
-	$wrapperdiv.append($imgtag);
-	var $backbutton = $('<p><button>Go Back</button></p>');
+	let $wrapperdiv = $('<div class="wrapperdiv"></div>');
+	let $diffcontainer = $('<div class="diffcontainer"></div>');
+	let $htag = $("<h4>Image A<br>Mouse over for Image B. Mouse Out for Image A.</h4>");
+	let $imgatag = $('<img class="imagea">');
+	$imgatag.prop("src", imageAURL);
+	let $imgbtag = $('<img class="imageb">');
+	$imgbtag.prop("src", imageBURL);
+	$diffcontainer.append($imgatag);
+	$diffcontainer.append($imgbtag);
+	let $backbutton = $('<p><button>Go Back</button></p>');
 	$backbutton.on("click", function(){
 		window.location.search = window.location.search + "&nogen=true";
 	});
+	$wrapperdiv.append($htag);
+	$wrapperdiv.append($diffcontainer);
 	$wrapperdiv.append($backbutton);
+	document.body.innerHTML = "";
 	$(document.body).css({
 		"padding": "0px",
 		"margin": "0px",
 		"border": "0px",
 		"text-align": "left"
 	});
-	document.body.innerHTML = "";
 	$(document.body).append($wrapperdiv);
 }
 
 function submitDiff(){
-	var imageAURL = $("#imageatextfield").prop("value");
-	var imageBURL = $("#imagebtextfield").prop("value");
+	let imageAURL = $("#imageatextfield").prop("value");
+	let imageBURL = $("#imagebtextfield").prop("value");
 	if (imageAURL && imageBURL && imageAURL !== "" && imageBURL !== ""){
-		var imageAURLEncoded = encodeURIComponent(imageAURL);
-		var imageBURLEncoded = encodeURIComponent(imageBURL);
+		let imageAURLEncoded = encodeURIComponent(imageAURL);
+		let imageBURLEncoded = encodeURIComponent(imageBURL);
 		window.location.search = "?imagea=" + imageAURLEncoded + "&imageb=" + imageBURLEncoded;
 	}
 }
 
 $(function(){
-	var params = parseURLParams(window.location.search);
+	let params = parseURLParams(window.location.search);
 	if (params.imagea && params.imageb){
 		if (params.nogen && params.nogen === "true"){
 			$("#imageatextfield").prop("value", params.imagea);
