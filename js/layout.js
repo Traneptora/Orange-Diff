@@ -24,7 +24,7 @@ function parseURLParams(url) {
 function setupDiffLayout(imageAURL, imageBURL){
 	let $wrapperdiv = $('<div class="wrapperdiv"></div>');
 	let $diffcontainer = $('<div class="diffcontainer"></div>');
-	let $htag = $("<h4>Image A<br>Mouse over for Image B. Mouse Out for Image A.</h4>");
+	let $htag = $("<h4>Mouse over for Image B. Mouse Out for Image A.</h4>");
 	let $imgatag = $('<img class="imagea">');
 	$imgatag.prop("src", imageAURL);
 	let $imgbtag = $('<img class="imageb">');
