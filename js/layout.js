@@ -1,21 +1,21 @@
 function parseURLParams(url) {
-	var queryStart = url.indexOf("?") + 1,
-		queryEnd   = url.indexOf("#") + 1 || url.length + 1,
-		query = url.slice(queryStart, queryEnd - 1),
-		pairs = query.split("&"),
-		parms = {}, i, n, v, nv;
+	let queryStart = url.indexOf("?") + 1;
+	let queryEnd   = url.indexOf("#") + 1 || url.length + 1;
+	let query = url.slice(queryStart, queryEnd - 1);
+	let pairs = query.split("&");
+	let params = {};
 
 	if (query === url || query === "") {
 		return [];
 	}
 
-	for (i = 0; i < pairs.length; i++) {
-		nv = pairs[i].split("=");
-		if (nv.length !== 2){
+	for (let i = 0; i < pairs.length; i++) {
+		let eqIndex = pairs[i].indexOf("=");
+		if (eqIndex < 0){
 			continue;
 		}
-		n = decodeURIComponent(nv[0]);
-		v = decodeURIComponent(nv[1]);
+		let key = decodeURIComponent(pairs[i].slice(0, eqIndex));
+		let value = decodeURIComponent(keyvalue[1]);
 		parms[n] = v;
 	}
 	return parms;
