@@ -22,35 +22,38 @@ function parseURLParams(url) {
 }
 
 function setupDiffLayout(imageAURL, imageBURL){
-	let $wrapperdiv = $('<div class="wrapperdiv"></div>');
-	let $diffcontainer = $('<div class="diffcontainer"></div>');
-	let $htag = $("<h4>Mouse over for Image B. Mouse Out for Image A.</h4>");
-	let $imgatag = $('<img class="imagea">');
-	$imgatag.prop("src", imageAURL);
-	let $imgbtag = $('<img class="imageb">');
-	$imgbtag.prop("src", imageBURL);
-	$diffcontainer.append($imgatag);
-	$diffcontainer.append($imgbtag);
-	let $backbutton = $('<p><button>Go Back</button></p>');
-	$backbutton.on("click", function(){
+	let htag = document.createElement('h4');
+	htag.appendChild(document.createTextNode('Mouse over for Image B. Mouse Out for Image A.'));
+	let imgatag = document.createElement('img');
+	imgatag.src = imageAURL;
+	imgatag.classList.add('imagea');
+	let imgbtag = document.createElement('img');
+	imgbtag.src = imageBURL;
+	imgbtag.classList.add('imageb');
+	let diffcontainer = document.createElement('div');
+	diffcontainer.classList.add('diffcontainer');
+	diffcontainer.appendChild(imgatag);
+	diffcontainer.appendChild(imgbtag);
+	let buttonwrapper = document.createElement('p');
+	let backbutton = document.createElement('button');
+	backbutton.appendChild(document.createTextNode('Go Back'));
+	backbutton.addEventListener("click", function(){
 		window.location.search = window.location.search + "&nogen=true";
 	});
-	$wrapperdiv.append($htag);
-	$wrapperdiv.append($diffcontainer);
-	$wrapperdiv.append($backbutton);
-	document.body.innerHTML = "";
-	$(document.body).css({
-		"padding": "0px",
-		"margin": "0px",
-		"border": "0px",
-		"text-align": "left"
-	});
-	$(document.body).append($wrapperdiv);
+	buttonwrapper.appendChild(backbutton);
+	let wrapperdiv = document.createElement('div');
+	wrapperdiv.classList.add('wrapperdiv');
+	wrapperdiv.appendChild(htag);
+	wrapperdiv.appendChild(diffcontainer);
+	wrapperdiv.appendChild(buttonwrapper);
+	document.body.innerHTML = '';
+	document.body.classList.add('imagediff');
+	document.body.appendChild(wrapperdiv);
 }
 
 function submitDiff(){
-	let imageAURL = $("#imageatextfield").prop("value");
-	let imageBURL = $("#imagebtextfield").prop("value");
+	let imageAURL = document.getElementById('imageatextfield').value;
+	let imageBURL = document.getElementById('imagebtextfield').value;
 	if (imageAURL && imageBURL && imageAURL !== "" && imageBURL !== ""){
 		let imageAURLEncoded = encodeURIComponent(imageAURL);
 		let imageBURLEncoded = encodeURIComponent(imageBURL);
@@ -58,14 +61,20 @@ function submitDiff(){
 	}
 }
 
-$(function(){
+function ready(){
 	let params = parseURLParams(window.location.search);
 	if (params.imagea && params.imageb){
 		if (params.nogen && params.nogen === "true"){
-			$("#imageatextfield").prop("value", params.imagea);
-			$("#imagebtextfield").prop("value", params.imageb);
+			document.getElementById('imageatextfield').value = params.imagea;
+			document.getElementById('imagebtextfield').value = params.imageb;
 		} else {
 			setupDiffLayout(params.imagea, params.imageb);
 		}
 	}
-});
+}
+
+if (document.readyState === 'loading'){
+	document.addEventListener("DOMContentLoaded", ready);
+} else {
+	ready();
+}
