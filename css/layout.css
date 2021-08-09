@@ -12,6 +12,10 @@
     paddign: 0px;
 }
 
+.diffcontainer {
+    margin-bottom: 25px;
+}
+
 .img-a {
     display: block;
 }
