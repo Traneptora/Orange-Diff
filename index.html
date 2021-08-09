@@ -1,63 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HalfOrange Primitive Pic Differences</title>
-	<meta charset="UTF-8">
-	<link rel="preload" href="/styles.css" as="style">
-	<link rel="preload" href="/fonts/noto/noto-sans/noto-sans-display/noto-sans-display.css" as="style">
-	<link rel="preload" href="js/layout.js" as="script">
+    <title>HalfOrange Primitive Pic Differences</title>
+    <meta charset="UTF-8">
+    <link rel="preload" href="/styles.css" as="style">
+    <link rel="preload" href="/fonts/noto/noto-sans/noto-sans-display/noto-sans-display.css" as="style">
+    <link rel="prelaod" href="css/layout.css" as="style">
+    <link rel="preload" href="js/layout.js" as="script">
 
-	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/manifest.json">
-	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-	<meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
-	<meta name="description" content="Leo Izen's Website">
-	<meta name="keywords" content="Leo,Izen,Website,LeoIzen,thebombzen,bombzen">
-	<meta name="author" content="Leo Izen">
-	<meta property="og:image" content="https://thebombzen.com/images/avatar-current/avatar-current_256.png">
-	<meta property="og:title" content="HalfOrange Primitive Pic Differences">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="https://thebombzen.com/Orange-Diff/">
-	<meta property="og:description" content="Primitive Pic Difference generator">
+    <meta name="description" content="Leo Izen's Website">
+    <meta name="keywords" content="Leo,Izen,Website,LeoIzen,thebombzen,bombzen">
+    <meta name="author" content="Leo Izen">
+    <meta property="og:image" content="https://thebombzen.com/images/avatar-current/avatar-current_256.png">
+    <meta property="og:title" content="HalfOrange Primitive Pic Differences">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thebombzen.com/Orange-Diff/">
+    <meta property="og:description" content="Primitive Pic Difference generator">
 
-	<link rel="stylesheet" type="text/css" href="/styles.css">
-	<link rel="stylesheet" type="text/css" href="css/layout.css">
-	<script src="js/layout.js"></script>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="/fonts/noto/noto-sans/noto-sans-display/noto-sans-display.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <script src="js/layout.js"></script>
 </head>
 <body>
-	<div id="wrapper">
-		<header id="maintitle">
-			Orange Diff
-		</header>
-	<hr>
-	<main>
-		<h3>Primitive Pic Difference Generator</h3>
-		<form action="javascript:submitDiff();">
-		<p>
-			<p>Image A URL:</p>
-			<input type="text" id="imageatextfield" style="margin-top: 5px; margin-bottom: 5px;">
-		</p>
-		<p>
-			<p>Image B URL:</p>
-			<input type="text" id="imagebtextfield" style="margin-top: 5px; margin-bottom: 5px;">
-		</p>
-		<p><input type="submit" value="View Difference"></p>
-		</form>
-	</main>
-	</div>
+    <div id="wrapper">
+        <header id="maintitle">
+            Orange Diff
+        </header>
+        <hr>
+        <main>
+            <h3>Primitive Pic Difference Generator</h3>
+            <form class="flex-row-container" action="javascript:submitDiff();">
+                <div class="flex-row-group">
+                    <div class="flex-row">
+                        <p>Image A URL:</p>
+                        <input type="url" class="img-txt" id="img-txt-a">
+                    </div>
+                    <div class="flex-row">
+                        <p>Image B URL:</p>
+                        <input type="url" class="img-txt" id="img-txt-b">
+                    </div>
+                </div>
+                <div class="flex-row-group">
+                    <div clas="flex-row">
+                        <input type="submit" value="View Difference">
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+    <div id="post-diff-wrapper" class="post-diff-wrapper">
+        <h4>Mouse over for Image B. Mouse Out for Image A.</h4>
+        <div class="diffcontainer">
+            <img class="img-a" id="img-a">
+            <img class="img-b" id="img-b">
+        </div>
+        <button onclick="window.location.search += '&nogen=true';">Go Back</button>
+    </div>
 </body>
 </html>
