@@ -1,80 +1,46 @@
-function parseURLParams(url) {
-	let queryStart = url.indexOf("?") + 1;
-	let queryEnd   = url.indexOf("#") + 1 || url.length + 1;
-	let query = url.slice(queryStart, queryEnd - 1);
-	let pairs = query.split("&");
-	let params = {};
-
-	if (query === url || query === "") {
-		return [];
-	}
-
-	for (let i = 0; i < pairs.length; i++) {
-		let eqIndex = pairs[i].indexOf("=");
-		if (eqIndex < 0){
-			continue;
-		}
-		let key = decodeURIComponent(pairs[i].slice(0, eqIndex));
-		let value = decodeURIComponent(pairs[i].slice(eqIndex + 1));
-		params[key] = value;
-	}
-	return params;
-}
-
-function setupDiffLayout(imageAURL, imageBURL){
-	let htag = document.createElement('h4');
-	htag.appendChild(document.createTextNode('Mouse over for Image B. Mouse Out for Image A.'));
-	let imgatag = document.createElement('img');
-	imgatag.src = imageAURL;
-	imgatag.classList.add('imagea');
-	let imgbtag = document.createElement('img');
-	imgbtag.src = imageBURL;
-	imgbtag.classList.add('imageb');
-	let diffcontainer = document.createElement('div');
-	diffcontainer.classList.add('diffcontainer');
-	diffcontainer.appendChild(imgatag);
-	diffcontainer.appendChild(imgbtag);
-	let buttonwrapper = document.createElement('p');
-	let backbutton = document.createElement('button');
-	backbutton.appendChild(document.createTextNode('Go Back'));
-	backbutton.addEventListener("click", function(){
-		window.location.search = window.location.search + "&nogen=true";
-	});
-	buttonwrapper.appendChild(backbutton);
-	let wrapperdiv = document.createElement('div');
-	wrapperdiv.classList.add('wrapperdiv');
-	wrapperdiv.appendChild(htag);
-	wrapperdiv.appendChild(diffcontainer);
-	wrapperdiv.appendChild(buttonwrapper);
-	document.body.innerHTML = '';
-	document.body.classList.add('imagediff');
-	document.body.appendChild(wrapperdiv);
+function setupDiffLayout(imageAURL, imageBURL) {
+    document.getElementById('imagea').src = imageAURL;
+    document.getElementById('imageb').src = imageBURL;
+    document.getElementById('entryside').style.display = 'none';
+    document.getElementById('viewside').style.display = 'block';
+    document.body.classList.add('imagediff');
 }
 
 function submitDiff(){
-	let imageAURL = document.getElementById('imageatextfield').value;
-	let imageBURL = document.getElementById('imagebtextfield').value;
-	if (imageAURL && imageBURL && imageAURL !== "" && imageBURL !== ""){
-		let imageAURLEncoded = encodeURIComponent(imageAURL);
-		let imageBURLEncoded = encodeURIComponent(imageBURL);
-		window.location.search = "?imagea=" + imageAURLEncoded + "&imageb=" + imageBURLEncoded;
-	}
+    const imageAURL = document.getElementById('imageatextfield').value;
+    const imageBURL = document.getElementById('imagebtextfield').value;
+    if (imageAURL && imageBURL && imageAURL !== "" && imageBURL !== ""){
+        const url = new URL(window.location.href);
+        url.searchParams.set('imagea', imageAURL);
+        url.searchParams.set('imageb', imageBURL);
+        url.searchParams.delete('nogen');
+        window.history.replaceState(null, "", url)
+        setupDiffLayout(imageAURL, imageBURL);
+    }
 }
 
 function ready(){
-	let params = parseURLParams(window.location.search);
-	if (params.imagea && params.imageb){
-		if (params.nogen && params.nogen === "true"){
-			document.getElementById('imageatextfield').value = params.imagea;
-			document.getElementById('imagebtextfield').value = params.imageb;
-		} else {
-			setupDiffLayout(params.imagea, params.imageb);
-		}
-	}
+    const params = new URLSearchParams(window.location.search);
+    const imagea = params.get('imagea');
+    const imageb = params.get('imageb');
+    const nogen = params.get('nogen');
+    if (imagea && imageb) {
+        if (nogen === 'true'){
+            document.getElementById('imageatextfield').value = imagea;
+            document.getElementById('imagebtextfield').value = imageb;
+            document.body.classList.remove('imagediff');
+            document.getElementById('viewside').style.display = 'none';
+            document.getElementById('entryside').style.display = 'block';
+        } else {
+            setupDiffLayout(imagea, imageb);
+        }
+    }
 }
 
-if (document.readyState === 'loading'){
-	document.addEventListener("DOMContentLoaded", ready);
-} else {
-	ready();
-}
+document.addEventListener("DOMContentLoaded", ready);
+document.getElementById('backbutton').addEventListener('click', () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('nogen', 'true');
+    window.history.replaceState(null, "", url);
+    ready();
+});
